@@ -1,12 +1,10 @@
 {
-  "name": "wyrihaximus/phergie-url",
+  "name": "phergie/phergie-irc-plugin-url",
   "description": "Phergie plugin for Display URL information about links",
   "keywords": [ "irc", "bot", "react", "plugin" ],
   "license": "MIT",
   "support": {
-    "irc": "irc://irc.freenode.net/phergie",
-    "issues": "https://github.com/WyriHaximus/PhergieUrl/issues",
-    "source": "https://github.com/WyriHaximus/PhergieUrl"
+    "irc": "irc://irc.freenode.net/phergie"
   },
   "require": {
     "php": ">=5.4.0",
