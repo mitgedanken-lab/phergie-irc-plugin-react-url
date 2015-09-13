@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Plugin\Url\Mime;
+namespace Phergie\Plugin\Url\Mime;
 
-use WyriHaximus\Phergie\Plugin\Url\UrlInterface;
+use Phergie\Plugin\Url\UrlInterface;
 
 class Image implements MimeInterface
 {

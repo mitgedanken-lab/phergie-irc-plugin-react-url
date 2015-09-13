@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Plugin\Url;
+namespace Phergie\Plugin\Url;
 
 /**
  * Url value object
  *
- * @package WyriHaximus\Phergie\Plugin\Url
+ * @package Phergie\Plugin\Url
  */
 class Url implements UrlInterface
 {

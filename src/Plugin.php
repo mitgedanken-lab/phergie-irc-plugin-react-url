@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Plugin\Url;
+namespace Phergie\Plugin\Url;
 
 use React\EventLoop\LoopInterface;
 use Phergie\Irc\Bot\React\AbstractPlugin;
@@ -16,17 +16,17 @@ use Phergie\Irc\Bot\React\EventQueue;
 use Phergie\Irc\Client\React\LoopAwareInterface;
 use Phergie\Irc\Event\UserEvent;
 use React\Promise\Deferred;
-use WyriHaximus\Phergie\Plugin\Http\Request;
+use Phergie\Plugin\Http\Request;
 
 /**
  * Plugin for Display URL information about links.
  *
  * @category Phergie
- * @package WyriHaximus\Phergie\Plugin\Url
+ * @package Phergie\Plugin\Url
  */
 class Plugin extends AbstractPlugin implements LoopAwareInterface
 {
-    const URL_HANDLER_INTERFACE = 'WyriHaximus\Phergie\Plugin\Url\UrlHandlerInterface';
+    const URL_HANDLER_INTERFACE = 'Phergie\Plugin\Url\UrlHandlerInterface';
 
     /**
      * @var UrlHandlerInterface
@@ -176,7 +176,8 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
                 $this->logDebug('[' . $requestId . ']Reponse (after ' . ($end - $start) . 's): ' . $code);
             },
             'resolveCallback' =>
-                function ($data, $headers, $code) use ($requestId, $url, $event, $queue, $start) {
+                function ($result) use ($requestId, $url, $event, $queue, $start) {
+                    list ($data, $headers, $code) = $result;
                     $end = microtime(true);
                     $message = '[';
                     $message .= $requestId;

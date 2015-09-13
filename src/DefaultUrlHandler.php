@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Plugin\Url;
+namespace Phergie\Plugin\Url;
 
-use WyriHaximus\Phergie\Plugin\Url\Mime;
+use Phergie\Plugin\Url\Mime;
 
 /**
  * Default URL handler to create a message about a
  *
  * @category Phergie
- * @package WyriHaximus\Phergie\Plugin\Url
+ * @package Phergie\Plugin\Url
  */
 class DefaultUrlHandler implements UrlHandlerInterface
 {

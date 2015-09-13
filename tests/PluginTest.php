@@ -8,21 +8,22 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Tests\Plugin\Url;
+namespace Phergie\Tests\Plugin\Url;
 
 use Phake;
-use WyriHaximus\Phergie\Plugin\Url\Plugin;
+use Phergie\Plugin\Url\Plugin;
+use React\Promise\FulfilledPromise;
 
 /**
  * Tests for the Plugin class.
  *
  * @category Phergie
- * @package WyriHaximus\Phergie\Plugin\Url
+ * @package Phergie\Plugin\Url
  */
 class PluginTest extends \PHPUnit_Framework_TestCase
 {
     protected static function getMethod($name) {
-        $class = new \ReflectionClass('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $class = new \ReflectionClass('Phergie\Plugin\Url\Plugin');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method;
@@ -58,16 +59,16 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testGetHandler() {
         $plugin = new Plugin();
-        $this->assertInstanceOf('WyriHaximus\Phergie\Plugin\Url\UrlHandlerInterface', $plugin->getHandler());
-        $this->assertInstanceOf('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler', $plugin->getHandler());
+        $this->assertInstanceOf('Phergie\Plugin\Url\UrlHandlerInterface', $plugin->getHandler());
+        $this->assertInstanceOf('Phergie\Plugin\Url\DefaultUrlHandler', $plugin->getHandler());
     }
 
     public function testCustomHandler() {
-        $handler = Phake::mock('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler');
+        $handler = Phake::mock('Phergie\Plugin\Url\DefaultUrlHandler');
         $plugin = new Plugin(array(
             'handler' => $handler,
         ));
-        $this->assertTrue(in_array('WyriHaximus\Phergie\Plugin\Url\UrlHandlerInterface', class_implements($plugin->getHandler())));
+        $this->assertTrue(in_array('Phergie\Plugin\Url\UrlHandlerInterface', class_implements($plugin->getHandler())));
         $this->assertSame($handler, $plugin->getHandler());
     }
 
@@ -76,7 +77,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $plugin = new Plugin(array(
             'handler' => $handler,
         ));
-        $this->assertInstanceOf('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler', $plugin->getHandler());
+        $this->assertInstanceOf('Phergie\Plugin\Url\DefaultUrlHandler', $plugin->getHandler());
     }
 
     public function testHandleIrcReceived() {
@@ -87,7 +88,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'text' => 'test www.google.com test',
         ));
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->handleIrcReceived($event, $queue)->thenCallParent();
 
         $plugin->handleIrcReceived($event, $queue);
@@ -109,11 +110,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $target = '#foobar';
         $message = 'foo:bar';
 
-        $url = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Url');
-        $handler = Phake::mock('WyriHaximus\Phergie\Plugin\Url\UrlHandlerInterface');
+        $url = Phake::mock('Phergie\Plugin\Url\Url');
+        $handler = Phake::mock('Phergie\Plugin\Url\UrlHandlerInterface');
         Phake::when($handler)->handle($url)->thenReturn($message);
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->getHandler()->thenReturn($handler);
 
         $event = Phake::mock('Phergie\Irc\Event\UserEvent');
@@ -177,7 +178,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $emitter = Phake::mock('Evenement\EventEmitterInterface');
         Phake::when($emitter)->listeners($eventName)->thenReturn(array('foo' => 'bar'));
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->preparePromises()->thenReturn(array(
             $privateDeferred,
             Phake::mock('React\Promise\PromiseInterface'),
@@ -208,7 +209,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         Phake::when($loop)->listeners('url.shorten.google.com')->thenReturn(array());
 
         $emitter = Phake::mock('Evenement\EventEmitterInterface');
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->preparePromises()->thenReturn(array(
             $privateDeferred,
             Phake::mock('React\Promise\PromiseInterface'),
@@ -237,28 +238,28 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
         $event = Phake::mock('Phergie\Irc\Event\UserEvent');
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         $request = self::getMethod('createRequest')->invokeArgs($plugin, array(
             'foo:bar',
             $url,
             $event,
             $queue,
         ));
-        $this->assertInstanceOf('WyriHaximus\Phergie\Plugin\Http\Request', $request);
+        $this->assertInstanceOf('Phergie\Plugin\Http\Request', $request);
 
-        $request->callResponse(array(
+        Phake::when($plugin)->emitShorteningEvents($this->isType('string'), $this->isType('string'))->thenReturn(new FulfilledPromise($url));
+
+        $request->callResolve(['', array(
             'foo' => 'bar',
-        ), 200);
+        ), 200]);
 
-        Phake::when($plugin)->emitShorteningEvents($this->isType('string'), $this->isType('string'))->thenReturn(Phake::mock('React\Promise\PromiseInterface'));
-
-        $request->callResolve('', array(
+        $request->callResolve(['', array(
             'foo' => 'bar',
-        ), 200);
+        ), 200]);
 
         Phake::inOrder(
             Phake::verify($plugin, Phake::times(2))->logDebug($this->isType('string')),
-            Phake::verify($plugin)->emitShorteningEvents($this->isType('string'), $this->isType('string'))
+            Phake::verify($plugin, Phake::times(2))->emitShorteningEvents($this->isType('string'), $this->isType('string'))
         );
     }
 
@@ -273,7 +274,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      * @dataProvider testHandleUrlUselessUrlProvider
      */
     public function testHandleUrlUselessUrl($url) {
-        $this->assertNotTrue(self::getMethod('handleUrl')->invokeArgs(Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin'), array(
+        $this->assertNotTrue(self::getMethod('handleUrl')->invokeArgs(Phake::mock('Phergie\Plugin\Url\Plugin'), array(
             $url,
             Phake::mock('Phergie\Irc\Event\UserEvent'),
             Phake::mock('Phergie\Irc\Bot\React\EventQueue'),
@@ -289,7 +290,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $emitter = Phake::mock('Evenement\EventEmitterInterface');
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->setEventEmitter($emitter)->thenCallParent();
         Phake::when($plugin)->emitUrlEvents($this->isType('string'), $correctedUrl, $event, $queue)->thenReturn(false);
         $plugin->setEventEmitter($emitter);
@@ -317,9 +318,9 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
         $event = Phake::mock('Phergie\Irc\Event\UserEvent');
         $emitter = Phake::mock('Evenement\EventEmitterInterface');
-        $request = Phake::mock('WyriHaximus\Phergie\Plugin\Http\Request');
+        $request = Phake::mock('Phergie\Plugin\Http\Request');
 
-        $plugin = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Plugin');
+        $plugin = Phake::mock('Phergie\Plugin\Url\Plugin');
         Phake::when($plugin)->setEventEmitter($emitter)->thenCallParent();
         Phake::when($plugin)->emitUrlEvents($this->isType('string'), $url, $event, $queue)->thenReturn(true);
         Phake::when($plugin)->createRequest($this->isType('string'), $url, $event, $queue)->thenReturn($request);

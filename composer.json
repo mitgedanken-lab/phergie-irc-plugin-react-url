@@ -11,7 +11,7 @@
     "ext-gd": "^0.0.0",
     "phergie/phergie-irc-bot-react": "~1.0",
     "nojimage/twitter-text-php": "1.1.1",
-    "wyrihaximus/phergie-http": "~1.0|~2.0",
+    "phergie/phergie-irc-plugin-http": "^3.0.0-alpha1",
     "react/promise": "~1.0|~2.0"
   },
   "require-dev": {
@@ -22,12 +22,12 @@
   },
   "autoload": {
     "psr-4": {
-      "WyriHaximus\\Phergie\\Plugin\\Url\\": "src"
+      "Phergie\\Plugin\\Url\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "WyriHaximus\\Phergie\\Tests\\Plugin\\Url\\": "tests"
+      "Phergie\\Tests\\Plugin\\Url\\": "tests"
     }
   }
 }

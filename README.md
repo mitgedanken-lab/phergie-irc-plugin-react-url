@@ -1,15 +1,15 @@
-# WyriHaximus/PhergieUrl
+# Url Plugin
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for Display URL information about links.
 
-[![Build Status](https://secure.travis-ci.org/WyriHaximus/PhergieUrl.png?branch=master)](http://travis-ci.org/WyriHaximus/PhergieUrl)
+[![Build Status](https://secure.travis-ci.org/phergie/plugin-url.png?branch=master)](http://travis-ci.org/phergie/plugin-url)
 
 ## Install
 
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
 ```
-composer require wyrihaximus/phergie-url 
+composer require phergie/phergie-irc-plugin-url 
 ```
 
 See Phergie documentation for more information on
@@ -23,18 +23,18 @@ return array(
     'plugins' => array(
 
         // dependencies
-        new \WyriHaximus\Phergie\Plugin\Dns\Plugin, // Handles DNS lookups for the HTTP plugin
-        new \WyriHaximus\Phergie\Plugin\Http\Plugin, // Handles the HTTP requests for this plugin
+        new \Phergie\Plugin\Dns\Plugin, // Handles DNS lookups for the HTTP plugin
+        new \Phergie\Plugin\Http\Plugin, // Handles the HTTP requests for this plugin
 
         // configuration
-        new \WyriHaximus\Phergie\Plugin\Url\Plugin(array(
+        new \Phergie\Plugin\Url\Plugin(array(
             // All configuration is optional
             
             'hostUrlEmitsOnly' => false // url.host.(all|<host>) emits only, no further URL handling / shortening
             
             // or
 
-            'handler' => new \WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler(), // URL handler that creates a formatted message based on the URL
+            'handler' => new \Phergie\Plugin\Url\DefaultUrlHandler(), // URL handler that creates a formatted message based on the URL
 
             // or
 

@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Tests\Plugin\Url;
+namespace Phergie\Tests\Plugin\Url;
 
 use Phake;
-use WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler;
-use WyriHaximus\Phergie\Plugin\Url\Url;
+use Phergie\Plugin\Url\DefaultUrlHandler;
+use Phergie\Plugin\Url\Url;
 
 class DefaultUrlHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,7 +50,7 @@ class DefaultUrlHandlerTest extends \PHPUnit_Framework_TestCase
     public function testHandle() {
         $url = new Url('', '', array(), 200, 3.14159265359);
 
-        $handler = Phake::partialMock('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler');
+        $handler = Phake::partialMock('Phergie\Plugin\Url\DefaultUrlHandler');
         Phake::when($handler)->handle($url)->thenCallParent();
         Phake::when($handler)->getDefaultReplacements($url)->thenReturn(array());
         Phake::when($handler)->extract($this->isType('array'), $url)->thenReturn(array());
@@ -144,11 +144,11 @@ class DefaultUrlHandlerTest extends \PHPUnit_Framework_TestCase
         ), 200, 3.14159265359);
         $replacements = array();
 
-        $html = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Mime\Html');
+        $html = Phake::mock('Phergie\Plugin\Url\Mime\Html');
         Phake::when($html)->matches('text/html')->thenCallParent();
         Phake::when($html)->extract($replacements, $url)->thenReturn($replacements);
 
-        $handler = Phake::partialMock('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler', null, array(
+        $handler = Phake::partialMock('Phergie\Plugin\Url\DefaultUrlHandler', null, array(
             $html,
         ));
 
@@ -166,11 +166,11 @@ class DefaultUrlHandlerTest extends \PHPUnit_Framework_TestCase
         ), 200, 3.14159265359);
         $replacements = array();
 
-        $html = Phake::mock('WyriHaximus\Phergie\Plugin\Url\Mime\Html');
+        $html = Phake::mock('Phergie\Plugin\Url\Mime\Html');
         Phake::when($html)->matches('text/xml')->thenCallParent();
         Phake::when($html)->extract($replacements, $url)->thenReturn($replacements);
 
-        $handler = Phake::partialMock('WyriHaximus\Phergie\Plugin\Url\DefaultUrlHandler', null, array(
+        $handler = Phake::partialMock('Phergie\Plugin\Url\DefaultUrlHandler', null, array(
             $html,
         ));
 

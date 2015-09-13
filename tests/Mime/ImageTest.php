@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Tests\Plugin\Url\Mime;
+namespace Phergie\Tests\Plugin\Url\Mime;
 
-use WyriHaximus\Phergie\Plugin\Url\Mime\Image;
-use WyriHaximus\Phergie\Plugin\Url\Url;
+use Phergie\Plugin\Url\Mime\Image;
+use Phergie\Plugin\Url\Url;
 
 class ImageTest extends \PHPUnit_Framework_TestCase {
 

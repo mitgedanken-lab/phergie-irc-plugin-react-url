@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Plugin\Url;
+namespace Phergie\Plugin\Url;
 
 interface UrlHandlerInterface
 {

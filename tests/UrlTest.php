@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace WyriHaximus\Phergie\Tests\Plugin\Url;
+namespace Phergie\Tests\Plugin\Url;
 
-use WyriHaximus\Phergie\Plugin\Url\Url;
+use Phergie\Plugin\Url\Url;
 
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
