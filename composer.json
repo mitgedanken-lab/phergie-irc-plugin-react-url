@@ -1,5 +1,5 @@
 {
-  "name": "phergie/phergie-irc-plugin-url",
+  "name": "phergie/phergie-irc-plugin-react-url",
   "description": "Phergie plugin for Display URL information about links",
   "keywords": [ "irc", "bot", "react", "plugin" ],
   "license": "MIT",
@@ -22,12 +22,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Phergie\\Plugin\\Url\\": "src"
+      "Phergie\\Irc\\Plugin\\React\\Url\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Phergie\\Tests\\Plugin\\Url\\": "tests"
+      "Phergie\\Tests\\Irc\\Plugin\\React\\Url\\": "tests"
     }
   }
 }

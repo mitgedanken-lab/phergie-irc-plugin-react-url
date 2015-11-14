@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Plugin\Url;
+namespace Phergie\Irc\Plugin\React\Url;
 
 interface UrlHandlerInterface
 {

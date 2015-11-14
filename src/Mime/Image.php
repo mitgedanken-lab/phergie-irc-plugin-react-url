@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Plugin\Url\Mime;
+namespace Phergie\Irc\Plugin\React\Url\Mime;
 
-use Phergie\Plugin\Url\UrlInterface;
+use Phergie\Irc\Plugin\React\Url\UrlInterface;
 
 class Image implements MimeInterface
 {

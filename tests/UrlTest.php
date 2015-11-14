@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Tests\Plugin\Url;
+namespace Phergie\Tests\Irc\Plugin\React\Url;
 
-use Phergie\Plugin\Url\Url;
+use Phergie\Irc\Plugin\React\Url\Url;
 
 class UrlTest extends \PHPUnit_Framework_TestCase
 {

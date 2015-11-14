@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Plugin\Url;
+namespace Phergie\Irc\Plugin\React\Url;
 
-use Phergie\Plugin\Url\Mime;
+use Phergie\Irc\Plugin\React\Url\Mime;
 
 /**
  * Default URL handler to create a message about a
  *
  * @category Phergie
- * @package Phergie\Plugin\Url
+ * @package Phergie\Irc\Plugin\React\Url
  */
 class DefaultUrlHandler implements UrlHandlerInterface
 {

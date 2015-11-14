@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Plugin\Url\Mime;
+namespace Phergie\Irc\Plugin\React\Url\Mime;
 
-use Phergie\Plugin\Url\UrlInterface;
+use Phergie\Irc\Plugin\React\Url\UrlInterface;
 
 /**
  * Interface MimeInterface
  *
- * @package Phergie\Plugin\Url\Mime
+ * @package Phergie\Irc\Plugin\React\Url\Mime
  */
 interface MimeInterface
 {

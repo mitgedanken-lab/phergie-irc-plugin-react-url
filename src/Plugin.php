@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Plugin\Url;
+namespace Phergie\Irc\Plugin\React\Url;
 
 use React\EventLoop\LoopInterface;
 use Phergie\Irc\Bot\React\AbstractPlugin;
@@ -22,11 +22,11 @@ use Phergie\Plugin\Http\Request;
  * Plugin for Display URL information about links.
  *
  * @category Phergie
- * @package Phergie\Plugin\Url
+ * @package Phergie\Irc\Plugin\React\Url
  */
 class Plugin extends AbstractPlugin implements LoopAwareInterface
 {
-    const URL_HANDLER_INTERFACE = 'Phergie\Plugin\Url\UrlHandlerInterface';
+    const URL_HANDLER_INTERFACE = 'Phergie\Irc\Plugin\React\Url\UrlHandlerInterface';
 
     /**
      * @var UrlHandlerInterface

@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Phergie\Tests\Plugin\Url\Mime;
+namespace Phergie\Tests\Irc\Plugin\React\Url\Mime;
 
-use Phergie\Plugin\Url\Mime\Image;
-use Phergie\Plugin\Url\Url;
+use Phergie\Irc\Plugin\React\Url\Mime\Image;
+use Phergie\Irc\Plugin\React\Url\Url;
 
 class ImageTest extends \PHPUnit_Framework_TestCase {
 
