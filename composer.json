@@ -1,6 +1,6 @@
 {
   "name": "phergie/phergie-irc-plugin-react-url",
-  "description": "Phergie plugin for Display URL information about links",
+  "description": "Phergie plugin for displaying information about URLs",
   "keywords": [ "irc", "bot", "react", "plugin" ],
   "license": "MIT",
   "support": {
