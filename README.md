@@ -2,7 +2,7 @@
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for Display URL information about links.
 
-[![Build Status](https://secure.travis-ci.org/WyriHaximus/PhergieUrl.png?branch=master)](http://travis-ci.org/WyriHaximus/PhergieUrl)
+[![Build Status](https://secure.travis-ci.org/phergie/phergie-irc-plugin-react-url.png?branch=master)](http://travis-ci.org/phergie/phergie-irc-plugin-react-url)
 
 ## Install
 
