@@ -9,7 +9,7 @@
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
 ```
-composer require phergie/phergie-irc-plugin-url 
+composer require phergie/phergie-irc-plugin-react-url 
 ```
 
 See Phergie documentation for more information on
