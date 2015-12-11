@@ -27,14 +27,14 @@ return array(
         new \Phergie\Plugin\Http\Plugin, // Handles the HTTP requests for this plugin
 
         // configuration
-        new \Phergie\Plugin\Url\Plugin(array(
+        new \Phergie\Irc\Plugin\React\Url\Plugin(array(
             // All configuration is optional
             
             'hostUrlEmitsOnly' => false, // url.host.(all|<host>) emits only, no further URL handling / shortening
             
             // or
 
-            'handler' => new \Phergie\Plugin\Url\DefaultUrlHandler(), // URL handler that creates a formatted message based on the URL
+            'handler' => new \Phergie\Irc\Plugin\React\Url\DefaultUrlHandler(), // URL handler that creates a formatted message based on the URL
 
             // or
 
