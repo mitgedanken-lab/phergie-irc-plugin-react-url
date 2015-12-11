@@ -10,6 +10,7 @@
 
 namespace Phergie\Irc\Plugin\React\Url;
 
+use GuzzleHttp\Message\Response;
 use React\EventLoop\LoopInterface;
 use Phergie\Irc\Bot\React\AbstractPlugin;
 use Phergie\Irc\Bot\React\EventQueue;
@@ -176,8 +177,13 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
                 $this->logDebug('[' . $requestId . ']Reponse (after ' . ($end - $start) . 's): ' . $code);
             },
             'resolveCallback' =>
-                function ($result) use ($requestId, $url, $event, $queue, $start) {
-                    list ($data, $headers, $code) = $result;
+                function (Response $response) use ($requestId, $url, $event, $queue, $start) {
+                    $data = $response->getBody()->getContents();
+                    $headers = $response->getHeaders();
+                    array_walk($headers, function (&$value, $key) use ($response) {
+                        $value = $response->getHeader($key);
+                    });
+                    $code = $response->getStatusCode();
                     $end = microtime(true);
                     $message = '[';
                     $message .= $requestId;
