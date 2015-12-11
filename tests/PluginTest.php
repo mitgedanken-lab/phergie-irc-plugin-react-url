@@ -10,6 +10,7 @@
 
 namespace Phergie\Tests\Irc\Plugin\React\Url;
 
+use GuzzleHttp\Message\Response;
 use Phake;
 use Phergie\Irc\Plugin\React\Url\Plugin;
 use React\Promise\FulfilledPromise;
@@ -249,13 +250,20 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         Phake::when($plugin)->emitShorteningEvents($this->isType('string'), $this->isType('string'))->thenReturn(new FulfilledPromise($url));
 
-        $request->callResolve(['', array(
-            'foo' => 'bar',
-        ), 200]);
+        $body = Phake::mock('GuzzleHttp\Stream\StreamInterface');
+        Phake::when($body)->getContents()->thenReturn('');
 
-        $request->callResolve(['', array(
-            'foo' => 'bar',
-        ), 200]);
+        $request->callResolve(
+            new Response(200, [
+                'foo' => 'bar',
+            ], $body)
+        );
+
+        $request->callResolve(
+            new Response(200, [
+                'foo' => 'bar',
+            ], $body)
+        );
 
         Phake::inOrder(
             Phake::verify($plugin, Phake::times(2))->logDebug($this->isType('string')),
