@@ -8,7 +8,6 @@
   },
   "require": {
     "php": ">=5.4.0",
-    "ext-gd": "^0.0.0",
     "phergie/phergie-irc-bot-react": "~1.0",
     "nojimage/twitter-text-php": "1.1.1",
     "phergie/phergie-irc-plugin-http": "^3.0.0-alpha1",
