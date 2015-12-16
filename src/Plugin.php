@@ -205,8 +205,7 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
                             $this->sendMessage(new Url($url, $data, $headers, $code, $end - $start), $event, $queue);
                         }
                     );
-                }
-            ,
+                },
         ]);
     }
 
