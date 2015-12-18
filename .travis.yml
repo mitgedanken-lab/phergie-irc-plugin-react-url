@@ -58,5 +58,3 @@ notifications:
   irc:
     channels:
       - "chat.freenode.net#phergie"
-    use_notice: true
-    skip_join: true
