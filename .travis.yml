@@ -52,3 +52,11 @@ before_script:
 
 ## Run the actual test
 script: make travis
+
+## Send build notifications
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#phergie"
+    use_notice: true
+    skip_join: true
