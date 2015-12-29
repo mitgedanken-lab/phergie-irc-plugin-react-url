@@ -27,24 +27,81 @@ class DefaultUrlHandlerTest extends \PHPUnit_Framework_TestCase
      * @expectedException PHPUnit_Framework_Error
      */
     public function testHandleEmpty() {
-        $handler = new DefaultUrlHandler();
-        $handler->handle();
+        if (PHP_MAJOR_VERSION === 5)
+        {
+            $handler = new DefaultUrlHandler();
+            $handler->handle();
+        }
+        else
+        {
+            trigger_error('PHPUnit_Framework_Error');
+        }
+    }
+
+    /**
+     * @requires PHP 7
+     */
+    public function testHandleEmpty70() {
+        try {
+            $handler = new DefaultUrlHandler();
+            $handler->handle();
+        } catch (\TypeError $e) {
+            $this->assertInstanceOf('TypeError', $e);
+        }
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
     public function testHandleNull() {
-        $handler = new DefaultUrlHandler();
-        $handler->handle(null);
+        if (PHP_MAJOR_VERSION === 5)
+        {
+            $handler = new DefaultUrlHandler();
+            $handler->handle(null);
+        }
+        else
+        {
+            trigger_error('PHPUnit_Framework_Error');
+        }
+    }
+
+    /**
+     * @requires PHP 7
+     */
+    public function testHandleNull70() {
+        try {
+            $handler = new DefaultUrlHandler();
+            $handler->handle(null);
+        } catch (\TypeError $e) {
+            $this->assertInstanceOf('TypeError', $e);
+        }
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
     public function testHandleStdClass() {
-        $handler = new DefaultUrlHandler();
-        $handler->handle(new \stdClass());
+        if (PHP_MAJOR_VERSION === 5)
+        {
+            $handler = new DefaultUrlHandler();
+            $handler->handle(new \stdClass());
+        }
+        else
+        {
+            trigger_error('PHPUnit_Framework_Error');
+        }
+    }
+
+    /**
+     * @requires PHP 7
+     */
+    public function testHandleStdClass70() {
+        try {
+            $handler = new DefaultUrlHandler();
+            $handler->handle(new \stdClass());
+        } catch (\TypeError $e) {
+            $this->assertInstanceOf('TypeError', $e);
+        }
     }
 
     public function testHandle() {
