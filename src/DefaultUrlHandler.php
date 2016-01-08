@@ -49,10 +49,10 @@ class DefaultUrlHandler implements UrlHandlerInterface
         $this->pattern = $pattern ? $pattern : static::DEFAULT_PATTERN;
 
         if ($mimes === null) {
-            $this->mimes = array(
+            $this->mimes = [
                 new Mime\Html(),
                 new Mime\Image(),
-            );
+            ];
         } else {
             $this->mimes = $mimes;
         }
