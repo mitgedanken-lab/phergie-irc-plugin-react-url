@@ -58,6 +58,35 @@ This plugins also emits two events for url shortening. Only called when there ar
 * `url.shorten.HOSTNAME` For example `url.shorten.twitter.com` (`www.` is stripped from the hostname).
 * `url.shorten.all` For all hostnames.
 
+## Placeholders
+
+The following placeholders can be used to compose a message that is passed as the first argument for `DefaultUrlHandler` to create custom messages:
+
+* `%url%` - Full URL
+* `%url-short%` - Shortened URL
+* `%http-status-code%` - HTTP status code
+* `%timing%` - Time in seconds it took for th request to complete
+* `%timing2%` - Time in seconds it took for th request to complete rounded off to a maximum of two decimals
+* `%response-time%` - Time in seconds it took for th request to complete
+* `%response-time2%` - Time in seconds it took for th request to complete rounded off to a maximum of two decimals
+* `%title%` - Page title
+* `%composed-title%` - Page title
+
+### Header Placeholders
+
+Selection of response headers from: [en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_Headers](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_Headers)
+
+* `%header-age%`
+* `%header-content-type%`
+* `%header-content-length%`
+* `%header-content-language%`
+* `%header-date%`
+* `%header-etag%`
+* `%header-expires%`
+* `%header-last-modified%`
+* `%header-server%`
+* `%header-x-powered-by%`
+
 ## Tests
 
 To run the unit test suite:
