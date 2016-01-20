@@ -11,7 +11,8 @@
     "phergie/phergie-irc-bot-react": "~1.0",
     "nojimage/twitter-text-php": "1.1.1",
     "phergie/phergie-irc-plugin-http": "^3.0.0-alpha1",
-    "react/promise": "~1.0|~2.0"
+    "react/promise": "~1.0|~2.0",
+    "phergie/phergie-irc-plugin-react-eventfilter": "^1.0||^2.0"
   },
   "require-dev": {
     "phergie/phergie-irc-bot-react-development": "^1.0.2|^1.1"

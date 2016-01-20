@@ -40,6 +40,10 @@ return array(
 
             'shortenTimeout' => 15 // If after this amount of seconds no url shortener has come up with a short URL the normal URL will be used. (Not in effect when there are no shorteners listening.)
 
+            // or
+
+            'filter' => null // Any valid filter implementing Phergie\Irc\Plugin\React\EventFilter\FilterInterface to filter which messages should be handled 
+
         )),
 
     )

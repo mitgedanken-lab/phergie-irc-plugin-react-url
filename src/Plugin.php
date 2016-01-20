@@ -16,6 +16,7 @@ use Phergie\Irc\Bot\React\AbstractPlugin;
 use Phergie\Irc\Bot\React\EventQueue;
 use Phergie\Irc\Client\React\LoopAwareInterface;
 use Phergie\Irc\Event\UserEvent;
+use Phergie\Irc\Plugin\React\EventFilter\FilterInterface;
 use React\Promise\Deferred;
 use Phergie\Plugin\Http\Request;
 
@@ -27,7 +28,8 @@ use Phergie\Plugin\Http\Request;
  */
 class Plugin extends AbstractPlugin implements LoopAwareInterface
 {
-    const URL_HANDLER_INTERFACE = 'Phergie\Irc\Plugin\React\Url\UrlHandlerInterface';
+    const URL_HANDLER_INTERFACE  = 'Phergie\Irc\Plugin\React\Url\UrlHandlerInterface';
+    const EVENT_FILTER_INTERFACE = 'Phergie\Irc\Plugin\React\EventFilter\FilterInterface';
 
     /**
      * @var UrlHandlerInterface
@@ -41,6 +43,11 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
      * @var bool
      */
     protected $hostUrlEmitsOnly = false;
+
+    /**
+     * @var FilterInterface
+     */
+    protected $filter = null;
 
     /**
      * @var LoopInterface
@@ -72,6 +79,12 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
         }
         if (isset($config['hostUrlEmitsOnly'])) {
             $this->hostUrlEmitsOnly = boolval($config['hostUrlEmitsOnly']);
+        }
+        if (
+            isset($config['filter']) &&
+            in_array(static::EVENT_FILTER_INTERFACE, class_implements($config['filter']))
+        ) {
+            $this->filter = $config['filter'];
         }
     }
 
@@ -113,6 +126,12 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
 
     public function handleIrcReceived(UserEvent $event, EventQueue $queue)
     {
+        if (
+            $this->filter !== null &&
+            $this->filter->filter($event) !== false
+        ) {
+            return;
+        }
         $params = $event->getParams();
         $extractor = new \Twitter_Extractor($params['text']);
         $urls = $extractor->extractURLs();
