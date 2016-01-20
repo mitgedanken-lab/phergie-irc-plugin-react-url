@@ -12,6 +12,7 @@ namespace Phergie\Tests\Irc\Plugin\React\Url;
 
 use GuzzleHttp\Message\Response;
 use Phake;
+use Phergie\Irc\Plugin\React\EventFilter\NotFilter;
 use Phergie\Irc\Plugin\React\Url\Plugin;
 use React\Promise\FulfilledPromise;
 
@@ -350,5 +351,39 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $queue,
             ))
         );
+    }
+
+    public function testFiltered()
+    {
+        $event = Phake::mock('Phergie\Irc\Event\UserEvent');
+        Phake::when($event)->getParams()->thenReturn([
+            'text' => '',
+        ]);
+        $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
+        $filter = Phake::mock('Phergie\Irc\Plugin\React\EventFilter\FilterInterface');
+        Phake::when($filter)->filter($this->isInstanceOf('Phergie\Irc\Event\EventInterface'))->thenReturn(false);
+
+        (new Plugin([
+            'filter' => new NotFilter($filter),
+        ]))->handleIrcReceived($event, $queue);
+
+        Phake::verify($event, Phake::never())->getParams();
+    }
+
+    public function testNotFiltered()
+    {
+        $event = Phake::mock('Phergie\Irc\Event\UserEvent');
+        Phake::when($event)->getParams()->thenReturn([
+            'text' => '',
+        ]);
+        $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
+        $filter = Phake::mock('Phergie\Irc\Plugin\React\EventFilter\FilterInterface');
+        Phake::when($filter)->filter($this->isInstanceOf('Phergie\Irc\Event\EventInterface'))->thenReturn(true);
+
+        (new Plugin([
+            'filter' => new NotFilter($filter),
+        ]))->handleIrcReceived($event, $queue);
+
+        Phake::verify($event)->getParams();
     }
 }
