@@ -28,9 +28,6 @@ use Phergie\Plugin\Http\Request;
  */
 class Plugin extends AbstractPlugin implements LoopAwareInterface
 {
-    const URL_HANDLER_INTERFACE  = 'Phergie\Irc\Plugin\React\Url\UrlHandlerInterface';
-    const EVENT_FILTER_INTERFACE = 'Phergie\Irc\Plugin\React\EventFilter\FilterInterface';
-
     /**
      * @var UrlHandlerInterface
      */
@@ -68,7 +65,7 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
     {
         if (
             isset($config['handler']) &&
-            in_array(static::URL_HANDLER_INTERFACE, class_implements($config['handler']))
+            in_array(UrlHandlerInterface::class, class_implements($config['handler']))
         ) {
             $this->handler = $config['handler'];
         } else {
@@ -82,7 +79,7 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
         }
         if (
             isset($config['filter']) &&
-            in_array(static::EVENT_FILTER_INTERFACE, class_implements($config['filter']))
+            in_array(FilterInterface::class, class_implements($config['filter']))
         ) {
             $this->filter = $config['filter'];
         }

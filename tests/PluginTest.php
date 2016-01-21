@@ -12,6 +12,10 @@ namespace Phergie\Tests\Irc\Plugin\React\Url;
 
 use GuzzleHttp\Message\Response;
 use Phake;
+use Phergie\Irc\Bot\React\EventQueue;
+use Phergie\Irc\Event\EventInterface;
+use Phergie\Irc\Event\UserEvent;
+use Phergie\Irc\Plugin\React\EventFilter\FilterInterface;
 use Phergie\Irc\Plugin\React\EventFilter\NotFilter;
 use Phergie\Irc\Plugin\React\Url\Plugin;
 use React\Promise\FulfilledPromise;
@@ -355,13 +359,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testFiltered()
     {
-        $event = Phake::mock('Phergie\Irc\Event\UserEvent');
+        $event = Phake::mock(UserEvent::class);
         Phake::when($event)->getParams()->thenReturn([
             'text' => '',
         ]);
-        $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
-        $filter = Phake::mock('Phergie\Irc\Plugin\React\EventFilter\FilterInterface');
-        Phake::when($filter)->filter($this->isInstanceOf('Phergie\Irc\Event\EventInterface'))->thenReturn(false);
+        $queue = Phake::mock(EventQueue::class);
+        $filter = Phake::mock(FilterInterface::class);
+        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(false);
 
         (new Plugin([
             'filter' => new NotFilter($filter),
@@ -372,13 +376,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testNotFiltered()
     {
-        $event = Phake::mock('Phergie\Irc\Event\UserEvent');
+        $event = Phake::mock(UserEvent::class);
         Phake::when($event)->getParams()->thenReturn([
             'text' => '',
         ]);
-        $queue = Phake::mock('Phergie\Irc\Bot\React\EventQueue');
-        $filter = Phake::mock('Phergie\Irc\Plugin\React\EventFilter\FilterInterface');
-        Phake::when($filter)->filter($this->isInstanceOf('Phergie\Irc\Event\EventInterface'))->thenReturn(true);
+        $queue = Phake::mock(EventQueue::class);
+        $filter = Phake::mock(FilterInterface::class);
+        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(true);
 
         (new Plugin([
             'filter' => new NotFilter($filter),
