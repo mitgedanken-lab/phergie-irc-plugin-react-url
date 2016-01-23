@@ -357,28 +357,32 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFiltered()
+    public function provideFiltered()
     {
-        $event = Phake::mock(UserEvent::class);
-        Phake::when($event)->getParams()->thenReturn([
-            'text' => 'http://phergie.org',
-        ]);
-        $queue = Phake::mock(EventQueue::class);
-        $filter = Phake::mock(FilterInterface::class);
-        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(true);
+        yield [
+            '',
+            0,
+        ];
 
-        (new Plugin([
-            'filter' => $filter,
-        ]))->handleIrcReceived($event, $queue);
+        yield [
+            'http://phergie.org',
+            1,
+        ];
 
-        Phake::verify($filter, Phake::times(1))->filter($this->isInstanceOf(EventInterface::class));
+        yield [
+            'http://phergie.org http://wyrihaximus.net',
+            2,
+        ];
     }
 
-    public function testNotFiltered()
+    /**
+     * @dataProvider provideFiltered
+     */
+    public function testFiltered($text, $times)
     {
         $event = Phake::mock(UserEvent::class);
         Phake::when($event)->getParams()->thenReturn([
-            'text' => 'http://phergie.org http://wyrihaximus.net',
+            'text' => $text,
         ]);
         $queue = Phake::mock(EventQueue::class);
         $filter = Phake::mock(FilterInterface::class);
@@ -388,6 +392,6 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'filter' => $filter,
         ]))->handleIrcReceived($event, $queue);
 
-        Phake::verify($filter, Phake::times(2))->filter($this->isInstanceOf(EventInterface::class));
+        Phake::verify($filter, Phake::times($times))->filter($this->isInstanceOf(EventInterface::class));
     }
 }
