@@ -91,6 +91,17 @@ Selection of response headers from: [en.wikipedia.org/wiki/List_of_HTTP_header_f
 * `%header-server%`
 * `%header-x-powered-by%`
 
+## UrlSectionFilter
+
+This plugin comes with the `UrlSectionFilter` that lets you filter on the different key value pairs coming out of [`parse_url`](http://php.net/parse_url). The following example filter allows `www.phergie.org`, `www2.phergie.org`, and `phergie.org`:
+
+```php
+new OrFilter([
+    new UrlSectionFilter('host', '*.phergie.org'),
+    new UrlSectionFilter('host', 'phergie.org'),
+])
+``
+
 ## Tests
 
 To run the unit test suite:
