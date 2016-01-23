@@ -361,33 +361,33 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     {
         $event = Phake::mock(UserEvent::class);
         Phake::when($event)->getParams()->thenReturn([
-            'text' => '',
-        ]);
-        $queue = Phake::mock(EventQueue::class);
-        $filter = Phake::mock(FilterInterface::class);
-        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(false);
-
-        (new Plugin([
-            'filter' => new NotFilter($filter),
-        ]))->handleIrcReceived($event, $queue);
-
-        Phake::verify($event, Phake::never())->getParams();
-    }
-
-    public function testNotFiltered()
-    {
-        $event = Phake::mock(UserEvent::class);
-        Phake::when($event)->getParams()->thenReturn([
-            'text' => '',
+            'text' => 'http://phergie.org',
         ]);
         $queue = Phake::mock(EventQueue::class);
         $filter = Phake::mock(FilterInterface::class);
         Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(true);
 
         (new Plugin([
-            'filter' => new NotFilter($filter),
+            'filter' => $filter,
         ]))->handleIrcReceived($event, $queue);
 
-        Phake::verify($event)->getParams();
+        Phake::verify($filter, Phake::times(1))->filter($this->isInstanceOf(EventInterface::class));
+    }
+
+    public function testNotFiltered()
+    {
+        $event = Phake::mock(UserEvent::class);
+        Phake::when($event)->getParams()->thenReturn([
+            'text' => 'http://phergie.org http://wyrihaximus.net',
+        ]);
+        $queue = Phake::mock(EventQueue::class);
+        $filter = Phake::mock(FilterInterface::class);
+        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(true);
+
+        (new Plugin([
+            'filter' => $filter,
+        ]))->handleIrcReceived($event, $queue);
+
+        Phake::verify($filter, Phake::times(2))->filter($this->isInstanceOf(EventInterface::class));
     }
 }
