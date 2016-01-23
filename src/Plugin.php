@@ -11,6 +11,7 @@
 namespace Phergie\Irc\Plugin\React\Url;
 
 use GuzzleHttp\Message\Response;
+use Phergie\Irc\Plugin\React\Url\Filter\UrlEvent;
 use React\EventLoop\LoopInterface;
 use Phergie\Irc\Bot\React\AbstractPlugin;
 use Phergie\Irc\Bot\React\EventQueue;
@@ -123,17 +124,17 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
 
     public function handleIrcReceived(UserEvent $event, EventQueue $queue)
     {
-        if (
-            $this->filter !== null &&
-            $this->filter->filter($event) !== false
-        ) {
-            return;
-        }
         $params = $event->getParams();
         $extractor = new \Twitter_Extractor($params['text']);
         $urls = $extractor->extractURLs();
 
         foreach ($urls as $url) {
+            if (
+                $this->filter !== null &&
+                $this->filter->filter(new UrlEvent($url, $event)) !== false
+            ) {
+                continue;
+            }
             $this->handleUrl($url, $event, $queue);
         }
     }
