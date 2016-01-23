@@ -62,6 +62,17 @@ This plugins also emits two events for url shortening. Only called when there ar
 * `url.shorten.HOSTNAME` For example `url.shorten.twitter.com` (`www.` is stripped from the hostname).
 * `url.shorten.all` For all hostnames.
 
+## UrlSectionFilter
+
+This plugin comes with the `UrlSectionFilter` that lets you filter on the different key value pairs coming out of [`parse_url`](http://php.net/parse_url). The following example filter allows `www.phergie.org`, `www2.phergie.org`, and `phergie.org`:
+
+```php
+new OrFilter([
+    new UrlSectionFilter('host', '*.phergie.org'),
+    new UrlSectionFilter('host', 'phergie.org'),
+])
+``
+
 ## Tests
 
 To run the unit test suite:
