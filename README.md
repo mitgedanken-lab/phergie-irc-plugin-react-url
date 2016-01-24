@@ -100,7 +100,7 @@ new OrFilter([
     new UrlSectionFilter('host', '*.phergie.org'),
     new UrlSectionFilter('host', 'phergie.org'),
 ])
-``
+```
 
 ## Tests
 
