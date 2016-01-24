@@ -102,6 +102,8 @@ new OrFilter([
 ])
 ```
 
+The filter comes with a third `strict` parameter where instead of declaring out of scope on missing an URL part it return `false`.
+
 ## Tests
 
 To run the unit test suite:

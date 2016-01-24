@@ -18,14 +18,22 @@ class UrlSectionFilter implements FilterInterface
     protected $section;
 
     /**
+     * @var null|false
+     */
+    protected $strictResponse = null;
+
+    /**
      *
      * @param string $section
      * @param string $value
      */
-    public function __construct($section, $value)
+    public function __construct($section, $value, $strict = false)
     {
         $this->section = $section;
         $this->value = $value;
+        if ($strict === true) {
+            $this->strictResponse = false;
+        }
     }
 
     /**
@@ -40,7 +48,7 @@ class UrlSectionFilter implements FilterInterface
 
         $section = $event->getUrlSection($this->section);
         if ($section === false) {
-            return null;
+            return $this->strictResponse;
         }
 
         $pattern = '/^' . str_replace('*', '.*', $this->value) . '$/';
