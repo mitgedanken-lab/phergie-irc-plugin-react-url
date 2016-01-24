@@ -29,6 +29,13 @@ class UrlSectionFilterTest extends \PHPUnit_Framework_TestCase
             'http://phergie.org/',
             true,
         ];
+
+        yield [
+            'port',
+            80,
+            'http://phergie.org/',
+            null,
+        ];
     }
 
     /**
