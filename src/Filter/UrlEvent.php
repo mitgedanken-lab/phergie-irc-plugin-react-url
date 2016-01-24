@@ -80,6 +80,6 @@ class UrlEvent implements EventInterface
             return $this->parsedUrl[$section];
         }
 
-        return false;
+        return null;
     }
 }

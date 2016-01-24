@@ -28,7 +28,7 @@ class UrlEventTest extends \PHPUnit_Framework_TestCase
             [
                 'scheme' => 'http',
                 'host'   => 'phergie.org',
-                'port'   => false,
+                'port'   => null,
             ]
         ];
 

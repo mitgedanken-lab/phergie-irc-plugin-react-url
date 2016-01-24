@@ -47,7 +47,7 @@ class UrlSectionFilter implements FilterInterface
         }
 
         $section = $event->getUrlSection($this->section);
-        if ($section === false) {
+        if ($section === null) {
             return $this->strictResponse;
         }
 
