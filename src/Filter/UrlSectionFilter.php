@@ -19,6 +19,7 @@ class UrlSectionFilter implements FilterInterface
 
     /**
      *
+     * @param string $section
      * @param string $value
      */
     public function __construct($section, $value)
