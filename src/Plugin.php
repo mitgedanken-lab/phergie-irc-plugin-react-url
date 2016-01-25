@@ -11,11 +11,13 @@
 namespace Phergie\Irc\Plugin\React\Url;
 
 use GuzzleHttp\Message\Response;
+use Phergie\Irc\Plugin\React\Url\Filter\UrlEvent;
 use React\EventLoop\LoopInterface;
 use Phergie\Irc\Bot\React\AbstractPlugin;
 use Phergie\Irc\Bot\React\EventQueue;
 use Phergie\Irc\Client\React\LoopAwareInterface;
 use Phergie\Irc\Event\UserEvent;
+use Phergie\Irc\Plugin\React\EventFilter\FilterInterface;
 use React\Promise\Deferred;
 use Phergie\Plugin\Http\Request;
 
@@ -27,8 +29,6 @@ use Phergie\Plugin\Http\Request;
  */
 class Plugin extends AbstractPlugin implements LoopAwareInterface
 {
-    const URL_HANDLER_INTERFACE = 'Phergie\Irc\Plugin\React\Url\UrlHandlerInterface';
-
     /**
      * @var UrlHandlerInterface
      */
@@ -41,6 +41,11 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
      * @var bool
      */
     protected $hostUrlEmitsOnly = false;
+
+    /**
+     * @var FilterInterface
+     */
+    protected $filter = null;
 
     /**
      * @var LoopInterface
@@ -61,7 +66,7 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
     {
         if (
             isset($config['handler']) &&
-            in_array(static::URL_HANDLER_INTERFACE, class_implements($config['handler']))
+            in_array(UrlHandlerInterface::class, class_implements($config['handler']))
         ) {
             $this->handler = $config['handler'];
         } else {
@@ -72,6 +77,12 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
         }
         if (isset($config['hostUrlEmitsOnly'])) {
             $this->hostUrlEmitsOnly = boolval($config['hostUrlEmitsOnly']);
+        }
+        if (
+            isset($config['filter']) &&
+            in_array(FilterInterface::class, class_implements($config['filter']))
+        ) {
+            $this->filter = $config['filter'];
         }
     }
 
@@ -118,6 +129,12 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
         $urls = $extractor->extractURLs();
 
         foreach ($urls as $url) {
+            if (
+                $this->filter !== null &&
+                $this->filter->filter(new UrlEvent($url, $event)) !== false
+            ) {
+                continue;
+            }
             $this->handleUrl($url, $event, $queue);
         }
     }

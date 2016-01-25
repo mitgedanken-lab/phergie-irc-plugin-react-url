@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7626892017d5178352ab99728c18e13b",
-    "content-hash": "3a219ee43e432ba1562f642029c78d1a",
+    "hash": "1fdefb02dd9ca0c2c1233628d0a8d779",
+    "content-hash": "ffcc99df122f057d76690c85cdbc92e7",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -113,16 +113,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
+                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
-                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5d04bdd2881ac89abde1fb78cc234bce24327bb",
+                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb",
                 "shasum": ""
             },
             "require": {
@@ -167,7 +167,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-11-03 01:34:55"
+            "time": "2016-01-23 01:23:02"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -714,16 +714,16 @@
         },
         {
             "name": "phergie/phergie-irc-plugin-http",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phergie/plugin-http.git",
-                "reference": "6f44190806e0817c0fd1dfb06bf221903dddf7cc"
+                "reference": "b6ad183e193f25ef09119e3fc65057f5be23cffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phergie/plugin-http/zipball/6f44190806e0817c0fd1dfb06bf221903dddf7cc",
-                "reference": "6f44190806e0817c0fd1dfb06bf221903dddf7cc",
+                "url": "https://api.github.com/repos/phergie/plugin-http/zipball/b6ad183e193f25ef09119e3fc65057f5be23cffd",
+                "reference": "b6ad183e193f25ef09119e3fc65057f5be23cffd",
                 "shasum": ""
             },
             "require": {
@@ -760,7 +760,51 @@
                 "plugin",
                 "react"
             ],
-            "time": "2015-12-29 12:41:31"
+            "time": "2016-01-13 14:24:19"
+        },
+        {
+            "name": "phergie/phergie-irc-plugin-react-eventfilter",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phergie/phergie-irc-plugin-react-eventfilter.git",
+                "reference": "d5c4024034f466e510572927cac8956c10c1cac5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phergie/phergie-irc-plugin-react-eventfilter/zipball/d5c4024034f466e510572927cac8956c10c1cac5",
+                "reference": "d5c4024034f466e510572927cac8956c10c1cac5",
+                "shasum": ""
+            },
+            "require": {
+                "phergie/phergie-irc-bot-react": "~2"
+            },
+            "require-dev": {
+                "phake/phake": "2.0.0-beta2",
+                "phergie/phergie-irc-plugin-react-usermode": "~2",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "suggest": {
+                "phergie/phergie-irc-plugin-react-usermode": "supports filtering of events by channel modes of originating users"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phergie\\Irc\\Plugin\\React\\EventFilter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Phergie plugin for limiting processing of incoming events based on event metadata",
+            "keywords": [
+                "bot",
+                "irc",
+                "plugin",
+                "react"
+            ],
+            "time": "2015-12-22 03:29:44"
         },
         {
             "name": "psr/http-message",
@@ -2660,16 +2704,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc"
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a5eb815363c0388e83247e7e9853e5dbc14999cc",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
                 "shasum": ""
             },
             "require": {
@@ -2716,7 +2760,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "symfony/filesystem",

@@ -40,6 +40,10 @@ return array(
 
             'shortenTimeout' => 15 // If after this amount of seconds no url shortener has come up with a short URL the normal URL will be used. (Not in effect when there are no shorteners listening.)
 
+            // or
+
+            'filter' => null // Any valid filter implementing Phergie\Irc\Plugin\React\EventFilter\FilterInterface to filter which messages should be handled 
+
         )),
 
     )
@@ -86,6 +90,19 @@ Selection of response headers from: [en.wikipedia.org/wiki/List_of_HTTP_header_f
 * `%header-last-modified%`
 * `%header-server%`
 * `%header-x-powered-by%`
+
+## UrlSectionFilter
+
+This plugin comes with the `UrlSectionFilter` that lets you filter on the different key value pairs coming out of [`parse_url`](http://php.net/parse_url). The following example filter allows `www.phergie.org`, `www2.phergie.org`, and `phergie.org`:
+
+```php
+new OrFilter([
+    new UrlSectionFilter('host', '*.phergie.org'),
+    new UrlSectionFilter('host', 'phergie.org'),
+])
+```
+
+The filter comes with a third `strict` parameter where instead of declaring out of scope on missing an URL part it return `false`.
 
 ## Tests
 

@@ -12,6 +12,11 @@ namespace Phergie\Tests\Irc\Plugin\React\Url;
 
 use GuzzleHttp\Message\Response;
 use Phake;
+use Phergie\Irc\Bot\React\EventQueue;
+use Phergie\Irc\Event\EventInterface;
+use Phergie\Irc\Event\UserEvent;
+use Phergie\Irc\Plugin\React\EventFilter\FilterInterface;
+use Phergie\Irc\Plugin\React\EventFilter\NotFilter;
 use Phergie\Irc\Plugin\React\Url\Plugin;
 use React\Promise\FulfilledPromise;
 
@@ -350,5 +355,43 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $queue,
             ))
         );
+    }
+
+    public function provideFiltered()
+    {
+        yield [
+            '',
+            0,
+        ];
+
+        yield [
+            'http://phergie.org',
+            1,
+        ];
+
+        yield [
+            'http://phergie.org http://wyrihaximus.net',
+            2,
+        ];
+    }
+
+    /**
+     * @dataProvider provideFiltered
+     */
+    public function testFiltered($text, $times)
+    {
+        $event = Phake::mock(UserEvent::class);
+        Phake::when($event)->getParams()->thenReturn([
+            'text' => $text,
+        ]);
+        $queue = Phake::mock(EventQueue::class);
+        $filter = Phake::mock(FilterInterface::class);
+        Phake::when($filter)->filter($this->isInstanceOf(EventInterface::class))->thenReturn(true);
+
+        (new Plugin([
+            'filter' => $filter,
+        ]))->handleIrcReceived($event, $queue);
+
+        Phake::verify($filter, Phake::times($times))->filter($this->isInstanceOf(EventInterface::class));
     }
 }
