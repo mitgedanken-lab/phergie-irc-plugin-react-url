@@ -6,22 +6,16 @@
   "support": {
     "irc": "irc://irc.freenode.net/phergie"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:svpernova09/Phake.git"
-    }
-  ],
   "require": {
     "php": "^5.6|^7.0",
     "phergie/phergie-irc-bot-react": "~2",
-    "nojimage/twitter-text-php": "1.1.1",
+    "nojimage/twitter-text-php": "~2.0",
     "phergie/phergie-irc-plugin-http": "^4.0",
     "react/promise": "~1.0|~2.0",
     "phergie/phergie-irc-plugin-react-eventfilter": "^1.0||^2.0"
   },
   "require-dev": {
-    "phake/phake": "dev-VerifierResultConstraint-issue",
+    "phake/phake": "^2.2.1",
     "phpunit/phpunit": "^4.6.0",
     "codeclimate/php-test-reporter": "~0.1",
     "satooshi/php-coveralls": "0.6.1",
