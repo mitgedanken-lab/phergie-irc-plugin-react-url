@@ -61,6 +61,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase {
                 new Url('', '<html><title>foo&#39;s w&ouml;rk</title></html></html>', array(), 200, 1),
             ),
             array(
+                array(
+                    '%title%' => 'Avatar: The Last Airbender Is Returning as a New Netflix Series',
+                    '%composed-title%' => 'Avatar: The Last Airbender Is Returning as a New Netflix Series',
+                ),
+                new Url('', '<title>pq-earther<\/title><path /><title>Avatar: The Last Airbender Is Returning as a New Netflix Series</title>', array(), 200, 1),
+            ),
+            array(
                 array(),
                 new Url('', '', array(), 200, 1),
             ),
