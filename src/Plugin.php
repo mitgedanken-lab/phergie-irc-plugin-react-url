@@ -125,8 +125,8 @@ class Plugin extends AbstractPlugin implements LoopAwareInterface
     public function handleIrcReceived(UserEvent $event, EventQueue $queue)
     {
         $params = $event->getParams();
-        $extractor = new \Twitter_Extractor($params['text']);
-        $urls = $extractor->extractURLs();
+        $extractor = new \Twitter\Text\Extractor();
+        $urls = $extractor->extractURLs($params['text']);
 
         foreach ($urls as $url) {
             if (
